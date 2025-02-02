@@ -46,24 +46,32 @@ For Hardware:
 
 ### Implementation
 For Software:
+ C:\MinGW\bin
+ g++ --version
+ code --install-extension ms-vscode.cpptools
+ code --install-extension ritwickdey.LiveServer
+ cd "C:\Users\grash\OneDrive\Documents\Desktop\PGMenuPoll"
+ g++ server.cpp -o server.exe
+ server.exe
 # Installation
-[commands]
+  C:\MinGW\bin
+ g++ --version
+ code --install-extension ms-vscode.cpptools
+ code --install-extension ritwickdey.LiveServer
+ cd "C:\Users\grash\OneDrive\Documents\Desktop\PGMenuPoll"
 
 # Run
-[commands]
+ C:\MinGW\bin
+ g++ --version
+ code --install-extension ms-vscode.cpptools
+ code --install-extension ritwickdey.LiveServer
+ cd "C:\Users\grash\OneDrive\Documents\Desktop\PGMenuPoll"
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![alt text](image.png)
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
