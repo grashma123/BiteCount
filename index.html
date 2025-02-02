@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Hostel Menu Voting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>PG Hostel Weekly Menu Voting</h2>
+
+    <!-- Login Section -->
+    <div id="login-section">
+        <h3>Login</h3>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Enter Username (Alphabets only)" required>
+            <input type="password" id="password" placeholder="Enter Password (Numbers only)" required>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+        <p id="login-error"></p>
+    </div>
+
+    <!-- Menu Section (Hidden until login) -->
+    <div id="menu-section" style="display: none;">
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Dish</th>
+                <th>Action</th>
+                <th>Price (₹)</th>
+            </tr>
+        </table>
+
+        <p id="selected-dishes">Selected Dishes: None</p>
+        <p id="total-expense">Total Expense: 0 ₹</p>
+
+        <button onclick="submitVotes()">Submit Votes</button>
+    </div>
+
+    <script>
+        let totalExpense = 0;
+        let selectedDishes = [];
+
+        const menu = {
+            "Monday": [
+                { name: "Appam & Stew", price: 30 },
+                { name: "Rice & Chicken Curry", price: 50 },
+                { name: "Pulav", price: 40 }
+            ],
+            "Tuesday": [
+                { name: "Chapati & Dal Curry", price: 25 },
+                { name: "Meals", price: 35 },
+                { name: "Biriyani", price: 60 }
+            ],
+            "Wednesday": [
+                { name: "Dosa & Chutney", price: 20 },
+                { name: "Veg Fried Rice", price: 45 },
+                { name: "Chicken Manchurian", price: 70 }
+            ],
+            "Thursday": [
+                { name: "Idli & Sambar", price: 20 },
+                { name: "Fish Curry & Rice", price: 55 },
+                { name: "Parotta & Beef Curry", price: 65 }
+            ],
+            "Friday": [
+                { name: "Puttu & Kadala Curry", price: 25 },
+                { name: "Egg Curry & Rice", price: 40 },
+                { name: "Mutton Curry", price: 80 }
+            ],
+            "Saturday": [
+                { name: "Poori & Masala", price: 30 },
+                { name: "Veg Meals", price: 35 },
+                { name: "Chicken 65", price: 75 }
+            ],
+            "Sunday": [
+                { name: "Masala Dosa", price: 35 },
+                { name: "Mutton Biriyani", price: 90 },
+                { name: "Paneer Butter Masala", price: 70 }
+            ]
+        };
+
+        function vote(day, dish, price, button) {
+            if (button.classList.contains('selected')) {
+                // If already selected, deselect
+                button.classList.remove('selected');
+                button.classList.add('deselected');
+                totalExpense -= price;
+                selectedDishes = selectedDishes.filter(item => item !== dish);
+            } else {
+                // If not selected, select it
+                button.classList.remove('deselected');
+                button.classList.add('selected');
+                totalExpense += price;
+                selectedDishes.push(dish);
+            }
+
+            // Update the display
+            document.getElementById("total-expense").innerText = `Total Expense: ${totalExpense} ₹`;
+            document.getElementById("selected-dishes").innerText = `Selected Dishes: ${selectedDishes.join(", ") || "None"}`;
+        }
+
+        function displayMenu() {
+            const table = document.querySelector("table");
+
+            for (let day in menu) {
+                menu[day].forEach(dish => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${day}</td>
+                        <td>${dish.name}</td>
+                        <td>
+                            <button class="deselected" onclick="vote('${day}', '${dish.name}', ${dish.price}, this)">Select</button>
+                        </td>
+                        <td>${dish.price}₹</td>
+                    `;
+                    table.appendChild(row);
+                });
+            }
+        }
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("login-error");
+
+            // Username must be alphabetic & password numeric
+            if (!/^[A-Za-z]+$/.test(username)) {
+                errorMsg.innerText = "Invalid Username! Use alphabets only.";
+                return;
+            }
+            if (!/^\d+$/.test(password)) {
+                errorMsg.innerText = "Invalid Password! Use numbers only.";
+                return;
+            }
+
+            // Store the username in localStorage
+            localStorage.setItem("username", username);
+
+            // Hide login & show menu
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("menu-section").style.display = "block";
+            displayMenu();
+        }
+
+        function submitVotes() {
+            const username = localStorage.getItem("username");
+
+            if (username) {
+                // Save selected dishes to localStorage (simulating file-based communication)
+                localStorage.setItem("votes", JSON.stringify({ username: username, selectedDishes: selectedDishes }));
+
+                // Show success message
+                alert("Votes submitted successfully!");
+
+                // Optionally, display the saved data (this would be handled manually on the backend)
+                console.log("Saved votes:", selectedDishes);
+            }
+        }
+    </script>
+
+</body>
+</html>
+

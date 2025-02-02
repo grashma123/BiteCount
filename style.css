@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #ff9800;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #f57c00;
+}
+
+button.selected {
+    background-color: #4CAF50;
+}
+
+button.deselected {
+    background-color: #ff9800;
+}
+
+#total-expense, #selected-dishes {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#login-section {
+    margin-top: 20px;
+}
+
+#login-form input {
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+#login-form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+#login-error {
+    font-size: 0.9em;
+    color: red;
+    margin-top: 10px;
+}
